@@ -33,7 +33,6 @@ public class BulletMovement : NetworkBehaviour
             {
                 DespawnBulletServerRpc();
             }
-            //Destroy(gameObject);
         }
     }
 

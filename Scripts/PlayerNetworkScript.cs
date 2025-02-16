@@ -6,7 +6,7 @@ public class PlayerNetworkScript : NetworkBehaviour
 {
     [SerializeField] NetworkVariable<int> health = new NetworkVariable<int>(100);
     public NetworkVariable<int> deaths = new NetworkVariable<int>(0);
-    Vector3 mySpawnPos;
+    [SerializeField] Vector3 mySpawnPos;
 
 
     [ServerRpc(RequireOwnership =false)]
@@ -19,6 +19,7 @@ public class PlayerNetworkScript : NetworkBehaviour
     public void SpawnPlayerOnSpawnPointClientRpc(Vector3 pos)
     {
         //Debug.Log(IsOwner);
+        Debug.Log($"[ClientRpc] Respawning Player {OwnerClientId} at {pos}");
         transform.position = pos;
         mySpawnPos = pos;
         
@@ -38,10 +39,11 @@ public class PlayerNetworkScript : NetworkBehaviour
         {
             deaths.Value++;
             health.Value = 100;
-            transform.position = mySpawnPos;
+            SpawnPlayerOnSpawnPointClientRpc(mySpawnPos);
             ScoreUpdate();
         }
     }
+
 
    
 }

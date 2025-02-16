@@ -35,7 +35,7 @@ public class BulletSpawner : NetworkBehaviour
     {
         var instance = Instantiate(bulletPrefab);
         var instanceNetworkObject = instance.GetComponent<NetworkObject>();
-        instanceNetworkObject.transform.position = transform.position + new Vector3(0, 1, 0);
+        instanceNetworkObject.transform.position = transform.position + new Vector3(1, 1, 0);
         instanceNetworkObject.Spawn();
     }
 }
